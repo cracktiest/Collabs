@@ -22,6 +22,8 @@ void setup() {
     pinMode(pin, OUTPUT);
     digitalWrite(pin, HIGH);
   }
+  digitalWrite(6, HIGH);
+  delay(4000);
   digitalWrite(7, LOW);
   delay(750);
   //pinMode untuk output (motor, relay, dll)
@@ -46,9 +48,11 @@ void setup() {
 
 void loop() {
   if (digitalRead(inputPin) == HIGH) {
+    digitalWrite(6, LOW);
+    delay(1000);
     for (int tes = 2; tes <= 5; tes++) {
-          digitalWrite(tes, HIGH);
-        }
+      digitalWrite(tes, HIGH);
+    }
   }
   //ketika tombol/sensor terdeteksi maka menu akan bertambah 1, menggunakan fungsi button debounce
   //  if (digitalRead(inputPin) == LOW && kondisi == 1) {
