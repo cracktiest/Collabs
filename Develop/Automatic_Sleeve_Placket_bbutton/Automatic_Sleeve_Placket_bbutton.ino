@@ -53,27 +53,33 @@ void pneumatic() {
       for (int pin = 2; pin <= 9; pin++) {
         digitalWrite(pin, HIGH);
       }
+      amenu = 0;
       break;
     case 1:
-    amenu=0;
       Serial.println("case 1");
-      digitalWrite(6, LOW);
+
+      if (amenu == 0) {
+        digitalWrite(6, LOW);
+        delay(1000);
+        digitalWrite(8, LOW);
+        delay(800);
+        amenu = 1;
+      }
+      for (int pin = 2; pin <= 5; pin++) {
+        delay(100);
+        digitalWrite(pin, LOW);
+      }
+      delay(200);
+      digitalWrite(8, HIGH);
+      //      menu=2;
+      //      pneumatic();
       break;
     case 2:
       Serial.println("case 2");
-      if (amenu == 0) {
-        digitalWrite(8, LOW);
-        delay(800);
-        amenu=1;
-      }
-      for (int pin = 2; pin <= 5; pin++) {
-        delay(250);
-        digitalWrite(pin, LOW);
-      }
-      delay(1000);
-      digitalWrite(8, HIGH);
+      digitalWrite(7, LOW);
+      digitalWrite(9, LOW);
       if (digitalRead(inputPin) == HIGH) {
-        amenu=0;
+        amenu = 0;
         Serial.println("inputPin High");
         //        delay(200);
         menu = 3;
@@ -97,8 +103,11 @@ void pneumatic() {
     case 4:
       Serial.println("case 4");
       if (digitalRead(inputSepatu) == LOW && digitalRead(inputPin) == LOW) {
-        delay(1000);
+        //        delay(1000);
         servoSepatu.write(50);
+        delay(500);
+        digitalWrite(7, HIGH);
+        digitalWrite(9, HIGH);
         menu = 0;
         pneumatic();
       }
