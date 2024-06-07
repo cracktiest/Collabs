@@ -3,6 +3,7 @@
 // 26 top
 
 void setup() {
+  Serial.begin(115200);
   // put your setup code here, to run once:
 
   for (int pin = 22; pin <= 29; pin++) {
@@ -60,6 +61,7 @@ void setup() {
 }
 
 void loop() {
+  Serial.println("test");
   // put your main code here, to run repeatedly:
 
 }

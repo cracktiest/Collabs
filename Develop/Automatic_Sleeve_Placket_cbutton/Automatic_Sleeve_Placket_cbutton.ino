@@ -26,12 +26,11 @@ void setup() {
   pinMode(inputSepatu, INPUT_PULLUP);
   pinMode(inputJoin, INPUT_PULLUP);
   pinMode(tombol, INPUT_PULLUP);
-  for (int pin = 2; pin <= 9; pin++) {
-    Serial.println(pin);
+  for (int pin = 22; pin <= 29; pin++) {
     pinMode(pin, OUTPUT);
     digitalWrite(pin, HIGH);
   }
-  Serial.println("Starting machine");
+  //  Serial.println("Starting machine");
   // put your setup code here, to run once:
 }
 
@@ -55,6 +54,8 @@ void loop() {
   pneumatic();
 }
 
+//void pick(String
+
 void pneumatic() {
   switch (menu) {
     case 0:
@@ -73,14 +74,23 @@ void pneumatic() {
         digitalWrite(26, LOW);
         delay(800);
         amenu = 1;
-        for (int pin = 22; pin <= 24; pin++) {
-          digitalWrite(pin, LOW);
-          delay(170);
-        }
+        //        for (int pin = 22; pin <= 24; pin++) {
+        //          digitalWrite(pin, LOW);
+        //          delay(170);
+        //        }
+        //        digitalWrite(28, LOW);
+        //        delay(170);
+        //for
+        digitalWrite(24, LOW);
+        delay(200);
         digitalWrite(28, LOW);
-        delay(170);
-          delay(200);
-        digitalWrite(29, HIGH);
+        delay(200);
+        digitalWrite(23, LOW);
+        delay(200);
+        digitalWrite(22, LOW);
+        delay(200);
+        delay(200);
+        digitalWrite(26, HIGH);
       }
       if (digitalRead(inputJoin) == LOW) {
         Serial.println("Input Join LOW");
@@ -93,8 +103,8 @@ void pneumatic() {
     case 2:
       Serial.println("case 2");
       // digitalWrite(7, LOW);
-      //      menu = 3;
-      //      pneumatic();
+      menu = 3;
+      pneumatic();
       //      digitalWrite(9, LOW);
       break;
 
@@ -119,13 +129,23 @@ void pneumatic() {
       //   digitalWrite(pin, HIGH);
       // }
       //lepas kain
-      for (int on = 22; on <= 25; on++) {
-        digitalWrite(on, HIGH);
-        delay(50);
-      }
+      //      for (int on = 22; on <= 25; on++) {
+      //        digitalWrite(on, HIGH);
+      //        delay(50);
+      //      }
+      //for
+      digitalWrite(24, HIGH);
+      delay(50);
+      digitalWrite(28, HIGH);
+      delay(50);
+      digitalWrite(22, HIGH);
+      delay(50);
+      digitalWrite(23, HIGH);
+      delay(50);
+      digitalWrite(29,HIGH);
       digitalWrite(26, HIGH);
       delay(500);
-      digitalWrite(27, HIGH);
+//      digitalWrite(27, HIGH);
       if (digitalRead(inputSepatu) == HIGH && digitalRead(inputPin) == HIGH) {
         //        delay(2000);
         servoSepatu.write(150);  //165
@@ -137,9 +157,11 @@ void pneumatic() {
       Serial.println("case 5");
       if (digitalRead(inputSepatu) == LOW && digitalRead(inputPin) == LOW) {
         //        delay(1000);
+        delay(1500);
         servoSepatu.write(20);
+        delay(500);
         digitalWrite(29, HIGH);
-        // digitalWrite(, HIGH);
+         digitalWrite(27, HIGH);
         //        servoBig.write(15);
         delay(500);
         // digitalWrite(7, HIGH);
