@@ -1,1 +1,3 @@
+Revolutionizing the garment industry through collaborative innovation, our project brings together the expertise of robotic engineering and sewing development. Our groundbreaking achievement is the creation of an automatic sleeve placket machine, seamlessly integrating sewing pattern technology with advanced automation via microcontrollers. This machine only costs around IDR 80 million compared to market products priced at IDR 300 million. This machine also boosts efficiency by a remarkable 57% than sewing pattern machine, marking a significant leap forward in production capability and quality assurance.
+
 ![Untitled 1 (1)](https://github.com/user-attachments/assets/f0548f8c-9f1e-45cb-8d2f-88c06848e8db)
