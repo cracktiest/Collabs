@@ -1,0 +1,58 @@
+int menu, a, b, c, d, e, f = 0;
+
+void setup()
+{
+    for (int bootInput = 2; bootInput <= 3; bootInput++)
+    {
+        pinMode(bootInput, INPUT_PULLUP);
+    }
+    for (int bootOutput = 4; bootOutput <= 9; bootOutput++)
+    {
+        pinMode(bootOutput, OUTPUT);
+        digitalWrite(bootOutput, LOW);
+        delay(500);
+        digitalWrite(bootOutput, HIGH);
+        delay(1000);
+    }
+}
+void loop()
+{
+    if (digitalRead(2) == HIGH)
+    {
+        menu++;
+        if (menu > 4)
+        {
+            menu = 0;
+        }
+    }
+    pneumatic();
+}
+
+void pneumatic()
+{
+    switch (menu)
+    {
+    case 0:
+        for (int i = 4; i <= 9; i++)
+        {
+            digitalWrite(i, HIGH);
+            delay(50);
+        }
+        break;
+    case 1:
+        digitalWrite(2, LOW);
+        delay(3000);
+        digitalWrite(3, LOW);
+        delay(5000);
+        break;
+    case 2:
+        digitalWrite(3, HIGH);
+        delay(3000);
+        digitalWrite(2, HIGH);
+        break;
+    case 3:
+        break;
+    case 4:
+        break;
+    }
+}

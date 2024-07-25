@@ -195,7 +195,7 @@ void pneumatic() {
         delay(200);
         digitalWrite(53, HIGH);
         servoSepatu.write(150);
-        delay(100);
+        delay(100); //500
         digitalWrite(29, HIGH);
         digitalWrite(27, HIGH);
         //        servoBig.write(15);
