@@ -2,5 +2,7 @@
     "board": "arduino:avr:uno",
     "programmer": "avrisp",
     "sketch": "Develop\\SPP\\SPP.ino",
-    "port": "COM3"
+    "port": "COM3",
+    "output": "sketch"
+    
 }
