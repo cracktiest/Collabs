@@ -25,8 +25,8 @@ void loop()
         {
             menu = 0;
         }
-    }
     pneumatic();
+    }
 }
 
 void pneumatic()
@@ -41,17 +41,22 @@ void pneumatic()
         }
         break;
     case 1:
-        digitalWrite(2, 0x0);
+        digitalWrite(4, 0x0);
         delay(3000);
-        digitalWrite(3, 0x0);
+        digitalWrite(5, 0x0);
         delay(5000);
+        if(digitalRead(3)==0x1){
+            menu++;
+            pneumatic();
+        }
         break;
     case 2:
-        digitalWrite(3, 0x1);
+        digitalWrite(4, 0x1);
         delay(3000);
-        digitalWrite(2, 0x1);
+        digitalWrite(5, 0x1);
         break;
     case 3:
+        menu = 0;
         break;
     case 4:
         break;

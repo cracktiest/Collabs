@@ -4,5 +4,4 @@
     "sketch": "Develop\\SPP\\SPP.ino",
     "port": "COM3",
     "output": "sketch"
-    
 }
