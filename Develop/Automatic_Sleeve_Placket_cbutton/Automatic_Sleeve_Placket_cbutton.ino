@@ -1,17 +1,20 @@
 #include <Servo.h>
+#include <avr/wdt.h>
 
 int tombol = 12;
-int inputPin = 13;
+int inputPin = 8;
 int inputSepatu = A1;  //dari 11
 int inputJoin = A2;
 int amenu, menu, kondisi = 0;
 int hitung = 0;
 int kondisi2 = 0;
 Servo servoSepatu;
+int lockServo =0;
 //Servo servoBig;
 
 
 void setup() {
+  wdt_enable(WDTO_8S);
   Serial.begin(115200);
   Serial.println("Inisialisasi");
   servoSepatu.attach(10);
@@ -40,6 +43,7 @@ void setup() {
 }
 
 void loop() {
+  wdt_reset();
   if (menu <= 3) {
     if (digitalRead(tombol) == HIGH && kondisi == 1) {
       menu++;
@@ -65,6 +69,7 @@ void loop() {
 void pneumatic() {
   switch (menu) {
     case 0:
+      lockServo = 0;
       hitung = 0;
       Serial.println("case 0");
       for (int pin = 22; pin <= 29; pin++) {
@@ -99,15 +104,15 @@ void pneumatic() {
         delay(200);
         digitalWrite(26, HIGH);
       }
+      //      menu=2;
+      //      pneumatic();
+      break;
+    case 2:
       if (digitalRead(inputJoin) == LOW) {
         Serial.println("Input Join LOW");
         menu = 3;
         pneumatic();
       }
-      //      menu=2;
-      //      pneumatic();
-      break;
-    case 2:
       Serial.println("case 2");
       // digitalWrite(7, LOW);
       menu = 3;
@@ -119,13 +124,13 @@ void pneumatic() {
     case 3: //cylinder program on
       Serial.println("case 3");
       digitalWrite(27, LOW);
-      delay(1000);
+      delay(100); //update
       //      digitalWrite(52, LOW);
       //      delay(1000);
       //      digitalWrite(53, LOW);
       // digitalWrite(9, LOW);
       //      servoBig.write(45);//35
-      if (digitalRead(inputPin) == HIGH) {
+      if (digitalRead(inputPin) == LOW) {
         amenu = 0;
         Serial.println("inputPin High");
         //        delay(200);
@@ -134,6 +139,7 @@ void pneumatic() {
       }
       break;
     case 4: //cylinder program off
+      delay(2000);
       Serial.println("case 4");
       // for (int pin = 2; pin <= 5; pin++) {
       //   digitalWrite(pin, HIGH);
@@ -157,7 +163,7 @@ void pneumatic() {
       delay(500);
       //      digitalWrite(27, HIGH);
       //      if (digitalRead(inputSepatu) == HIGH && digitalRead(inputPin) == HIGH) {
-      if (digitalRead(tombol) == HIGH && digitalRead(inputPin) == HIGH) {
+      if (digitalRead(inputPin) == LOW) {
         //        delay(2000);
         digitalWrite(53, HIGH);
         delay(200);
@@ -167,8 +173,11 @@ void pneumatic() {
         menu = 5;
         pneumatic();
       }
+      menu=5;
+      pneumatic();
       break;
     case 5:
+    Serial.println("case 5");
 //      if (digitalRead(inputSepatu) == HIGH) {
 //        Serial.println("Sepatu high");
 //      }
@@ -181,12 +190,13 @@ void pneumatic() {
 //      else if (digitalRead(inputSepatu) == LOW) {
 //        kondisi2 = 0;
 //      }
-      if (digitalRead(inputSepatu) == HIGH && digitalRead(inputPin) == HIGH ) {
+      if (digitalRead(inputSepatu) == HIGH && digitalRead(inputPin) == LOW ) {
         Serial.println("Servo Turun");
+        lockServo = 1;
         servoSepatu.write(20);  //165
       }
-      if (digitalRead(inputSepatu) == LOW && digitalRead(inputPin) == LOW) {
-        Serial.println("CASE 5 urgent");
+      if (digitalRead(inputPin) == HIGH && lockServo == 1) {
+        Serial.println("CASE 5 urgent");  
         //        delay(1000);
 //        delay(800);
         digitalWrite(53, HIGH);
